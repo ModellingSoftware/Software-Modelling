@@ -1,4 +1,6 @@
-package ROVU;
+package rovuClassDiagram1.ROVU;
+
+import rovuClassDiagram1.ROVU.Environment;
 
 import javax.swing.JOptionPane;
 import javax.vecmath.Vector3d;
@@ -106,7 +108,7 @@ public class Client {
 			
 			Mission mission = new Mission(numberOfRoverTeams, newEnvironment);
 			
-			createEnvironment(mission);
+//			createEnvironment(mission);
 			mission.startMission();
 		}					
 	}

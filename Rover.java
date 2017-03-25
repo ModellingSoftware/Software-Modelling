@@ -145,9 +145,6 @@ public abstract class Rover {
 	 * 
 	 * @return
 	 */
-	public void setType(RoverType type) {
-		this.type = type;
-	}
 
 	/**
 	 * 

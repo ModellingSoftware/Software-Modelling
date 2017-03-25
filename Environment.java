@@ -1,4 +1,4 @@
-package ROVU;
+package rovuClassDiagram1.ROVU;
 
 import java.awt.Color;
 

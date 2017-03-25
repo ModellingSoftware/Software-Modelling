@@ -3,13 +3,13 @@
 // --------------------------------------------------------
 
 
-package ROVU;
+package rovuClassDiagram1.ROVU;
 import java.io.*;
 import java.util.ArrayList;
 
 import javax.vecmath.Vector3d;
 
-import ROVU.CentralStation;
+import rovuClassDiagram1.ROVU.CentralStation;
 import simbad.gui.Simbad;
 import simbad.sim.Agent;
 
@@ -22,8 +22,10 @@ public class Mission {
 	
 	Mission(Environment env) {
 		out = new PrintStream(System.out);
-		numOfRoverTeams = 4;
+		numOfRoverTeams = 1;
 		out.print("Be Starting Missions All Day");
+		environment = env;
+
 	}
 	
 	Mission(int numbOfRoverTeams, Environment env) {
@@ -74,10 +76,14 @@ public class Mission {
         ArrayList<Agent> swarm = new ArrayList<Agent>();
         
         for (int i = 0; i < numOfRoverTeams; i++) {
-        	swarm.add(new ExampleRobot(new Vector3d(0 + i, 0, 0), "Mapping " + i));
-        	swarm.add(new ExampleRobot(new Vector3d(0.5 + i, 0, 0.5), "Photo " + i));
+        	swarm.add(new ExampleRobot(new Vector3d(0, 0, 0), "Mapping " + i));
+        	swarm.add(new ExampleRobot(new Vector3d(-2, 0, -2), "Photo " + i));
         }
-        Simbad frame = new Simbad(environment, false);
-        frame.update(frame.getGraphics());
+        
+        for(Agent robot:swarm){
+        	environment.add(robot);
+        }
+        
+        new Simbad(environment, false);
 	}
 }

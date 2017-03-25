@@ -17,7 +17,15 @@ public class CentralStation {
 	/**
 	 * 
 	 */
-	private static CentralStation instance = null;
+	private static CentralStation instance = new CentralStation();
+	
+	public static CentralStation getInstance() {
+		return instance;
+	}
+	
+	private CentralStation(){
+		
+	}
 	/**
 	 * 
 	 */
@@ -62,9 +70,7 @@ public class CentralStation {
 	 * 
 	 * @return  
 	 */
-	public static rovuClassDiagram1.ROVU.CentralStation getInstance() {
-		return instance;
-	}
+
 
 	/**
 	 * 

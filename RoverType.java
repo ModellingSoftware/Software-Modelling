@@ -16,5 +16,6 @@ public enum RoverType {
 	/**
 	 * 
 	 */
-	MappingRover;
+	MappingRover,
+	CO2Rover;
 };
