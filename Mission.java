@@ -3,29 +3,34 @@
 // --------------------------------------------------------
 
 
-package rovuClassDiagram1.ROVU;
-import rovuClassDiagram1.ROVU.CentralStation;
+package ROVU;
 import java.io.*;
+import java.util.ArrayList;
+
+import javax.vecmath.Vector3d;
+
+import ROVU.CentralStation;
+import simbad.gui.Simbad;
+import simbad.sim.Agent;
 
 public class Mission {
 	
-	int numOfMappingRovers,
-		numOfPhotoRovers;
+	private int	numOfRoverTeams;
+	private Environment environment;
 	
 	PrintStream out;
 	
-	Mission() {
+	Mission(Environment env) {
 		out = new PrintStream(System.out);
-		numOfMappingRovers = 4;
-		numOfPhotoRovers = 4;
+		numOfRoverTeams = 4;
 		out.print("Be Starting Missions All Day");
 	}
 	
-	Mission(int numOfMapRovers, int numOfPhoRovers) {
-		numOfMappingRovers = numOfMapRovers;
-		numOfPhotoRovers = numOfPhoRovers;
+	Mission(int numbOfRoverTeams, Environment env) {
+		numOfRoverTeams = numbOfRoverTeams;
+		environment = env;
 	}
-
+		
 	public CentralStation centralStation;
 	
 	/**
@@ -33,7 +38,12 @@ public class Mission {
 	 */
 	public void startMission() {
 		centralStation = CentralStation.getInstance();
+		
+		addRoversToEnvironment();
+		
 		centralStation.initMappingStage();
+		
+		
 	}
 	
 	/**
@@ -57,5 +67,17 @@ public class Mission {
 	 */
 	public String getMissionStatus() {
 		return "";
+	}
+	
+	public void addRoversToEnvironment() {
+		
+        ArrayList<Agent> swarm = new ArrayList<Agent>();
+        
+        for (int i = 0; i < numOfRoverTeams; i++) {
+        	swarm.add(new ExampleRobot(new Vector3d(0 + i, 0, 0), "Mapping " + i));
+        	swarm.add(new ExampleRobot(new Vector3d(0.5 + i, 0, 0.5), "Photo " + i));
+        }
+        Simbad frame = new Simbad(environment, false);
+        frame.update(frame.getGraphics());
 	}
 }

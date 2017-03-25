@@ -1,11 +1,15 @@
-package rovuClassDiagram1.ROVU;
+package ROVU;
 
 import javax.swing.JOptionPane;
+import javax.vecmath.Vector3d;
+
+import simbad.sim.Agent;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Client {
 
@@ -56,7 +60,7 @@ public class Client {
 				frame.pack();
 				frame.setVisible(true);
 				
-				if (givenUser != null) {
+				if (givenPass != null) {
 					if (givenPass.equals(password)) {
 						return "mainOperator";
 					}
@@ -91,13 +95,18 @@ public class Client {
 	}
 	
 	void startMission() {
+		Environment newEnvironment = new Environment();
+
 		if (defaultSettings()) {
-			Mission mission = new Mission();
+			Mission mission = new Mission(newEnvironment);
 			mission.startMission();
 		}
 		else {			
-			int[] numberOfRovers = askNumOfRovers(); //number of mapping rovers at index 0, number of photo rovers at index 1
-			Mission mission = new Mission(numberOfRovers[0], numberOfRovers[1]);
+			int numberOfRoverTeams = askNumOfRoverTeams();
+			
+			Mission mission = new Mission(numberOfRoverTeams, newEnvironment);
+			
+			createEnvironment(mission);
 			mission.startMission();
 		}					
 	}
@@ -118,27 +127,26 @@ public class Client {
 		return false;
 	}
 	
-	int[] askNumOfRovers() {
-		int[] numOfMapAndPhotoRovers = new int[2];
+	int askNumOfRoverTeams() {
 		JFrame frame = new JFrame("ROVU");
 		
-		Object[] inputField = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"};
-		
-		String givenNumOfMapRovers = (String)JOptionPane.showInputDialog(frame, "Choose the amount of mapping rovers for this mission (default = 4): ", "ROVU Client", JOptionPane.PLAIN_MESSAGE, null, inputField, "");
+		Object[] inputField = new Object[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"};
+		String givenNumOfRoverTeams = (String)JOptionPane.showInputDialog(frame, "Choose the amount of rover teams for this mission (default = 4): ", "ROVU Client", JOptionPane.PLAIN_MESSAGE, null, inputField, "");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
+						
+		return Integer.parseInt(givenNumOfRoverTeams);
+	}
+	
+	public void createEnvironment(Mission miss) {
+		Environment env = new Environment();
 		
-		inputField = new Object[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"};
-		String givenNumOfPhotoRovers = (String)JOptionPane.showInputDialog(frame, "Choose the amount of mapping rovers for this mission (default = 4): ", "ROVU Client", JOptionPane.PLAIN_MESSAGE, null, inputField, "");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.pack();
-		frame.setVisible(true);
-		
-		numOfMapAndPhotoRovers[0] = Integer.parseInt(givenNumOfMapRovers);
-		numOfMapAndPhotoRovers[1] = Integer.parseInt(givenNumOfPhotoRovers);
-				
-		return numOfMapAndPhotoRovers;
+        ArrayList<Agent> swarm = new ArrayList<Agent>();
+        
+        //for (
+        swarm.add(new ExampleRobot(new Vector3d(0, 0, 0), "Robot 1"));
+        swarm.add(new ExampleRobot(new Vector3d(-2, 0, -2), "Robot 2"));
 	}
 	
 	public static void main(String[] args) {
