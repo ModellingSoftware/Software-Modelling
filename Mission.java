@@ -3,13 +3,12 @@
 // --------------------------------------------------------
 
 
-package rovuClassDiagram1.ROVU;
+package ROVU;
 import java.io.*;
 import java.util.ArrayList;
 
 import javax.vecmath.Vector3d;
 
-import rovuClassDiagram1.ROVU.CentralStation;
 import simbad.gui.Simbad;
 import simbad.sim.Agent;
 
@@ -22,7 +21,7 @@ public class Mission {
 	
 	Mission(Environment env) {
 		out = new PrintStream(System.out);
-		numOfRoverTeams = 1;
+		numOfRoverTeams = 4;
 		out.print("Be Starting Missions All Day");
 		environment = env;
 
@@ -76,8 +75,19 @@ public class Mission {
         ArrayList<Agent> swarm = new ArrayList<Agent>();
         
         for (int i = 0; i < numOfRoverTeams; i++) {
-        	swarm.add(new ExampleRobot(new Vector3d(0, 0, 0), "Mapping " + i));
-        	swarm.add(new ExampleRobot(new Vector3d(-2, 0, -2), "Photo " + i));
+        	MappingRover newMapBot = new MappingRover(new Vector3d(-3, 20, -3 + 2*i), "MappingRover " + i);
+        	CameraRover newPhotoBot = new CameraRover(new Vector3d(-1, 20, -3 + 2*i), "PhotoRover " + i);
+        	CO2Rover newCO2Bot = new CO2Rover(new Vector3d(1, 20, -3 + 2*i), "CO2Rover " + i);
+
+        	
+        	swarm.add(newMapBot);
+        	centralStation.indexNewRover(newMapBot);
+        	
+        	swarm.add(newPhotoBot);
+        	centralStation.indexNewRover(newPhotoBot);
+
+        	swarm.add(newCO2Bot);
+        	centralStation.indexNewRover(newCO2Bot);
         }
         
         for(Agent robot:swarm){
@@ -85,5 +95,6 @@ public class Mission {
         }
         
         new Simbad(environment, false);
+        centralStation.startCentralStation();
 	}
 }

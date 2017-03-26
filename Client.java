@@ -1,6 +1,4 @@
-package rovuClassDiagram1.ROVU;
-
-import rovuClassDiagram1.ROVU.Environment;
+package ROVU;
 
 import javax.swing.JOptionPane;
 import javax.vecmath.Vector3d;
@@ -26,12 +24,13 @@ public class Client {
 	public void Start() {		
 		boolean loggedIn = false;
 		
-		while (true) {
+		while (!loggedIn) {
 			String operator = logIn();
 
 			if (operator == "mainOperator") {
 				if (mainOperatorMenu().equals("Start Mission")) {
 					startMission();
+					loggedIn = true;
 				}
 				out.printf("yo");
 				//mainOperatorMenu();
@@ -108,7 +107,6 @@ public class Client {
 			
 			Mission mission = new Mission(numberOfRoverTeams, newEnvironment);
 			
-//			createEnvironment(mission);
 			mission.startMission();
 		}					
 	}
@@ -139,16 +137,6 @@ public class Client {
 		frame.setVisible(true);
 						
 		return Integer.parseInt(givenNumOfRoverTeams);
-	}
-	
-	public void createEnvironment(Mission miss) {
-		Environment env = new Environment();
-		
-        ArrayList<Agent> swarm = new ArrayList<Agent>();
-        
-        //for (
-        swarm.add(new ExampleRobot(new Vector3d(0, 0, 0), "Robot 1"));
-        swarm.add(new ExampleRobot(new Vector3d(-2, 0, -2), "Robot 2"));
 	}
 	
 	public static void main(String[] args) {

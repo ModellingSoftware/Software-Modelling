@@ -1,4 +1,4 @@
-package rovuClassDiagram1.ROVU;
+package ROVU;
 
 
 public class CO2Level {
