@@ -18,11 +18,11 @@ public abstract class Rover extends Agent{
 	
     public Rover(Vector3d position, String name) {
         super(position, name);
-        
+    	this.setCanBeTraversed(false);
         // Add bumpers
         RobotFactory.addBumperBeltSensor(this, 12);
         // Add sonars
-        RobotFactory.addSonarBeltSensor(this, 4);        
+        RobotFactory.addSonarBeltSensor(this, 1);        
     }
 
 	/**
@@ -50,9 +50,6 @@ public abstract class Rover extends Agent{
 	 */
 	private boolean active;
 	
-	public void performBehaviour() {
-	
-	}
 	/**
 	 * 
 	 * @return
@@ -224,25 +221,25 @@ public abstract class Rover extends Agent{
     	
     	// perform the following actions every 5 virtual seconds
     	if(this.getCounter() % 5 == 0) {
-	    	if(this.collisionDetected()) {
-	    		this.currentMode = "avoidObstacle";
-	    	} else {
-	    		this.currentMode = "goAround";
-	    	}
+    		if(this.getCounter() % 20 == 0) {
+		    	if(this.collisionDetected()) {
+		    		this.currentMode = "avoidObstacle";
+		    	} else {
+		    		this.currentMode = "moveForward";
+		    	}
+    		} else {
+	    		this.currentMode = "moveForward";
+		    }
 	        
-	    	if(this.currentMode == "goAround") {
+	    	if(this.currentMode == "moveForward") {
+	        	setRotationalVelocity(0);
 	    		// the robot's speed is always 0.5 m/s
 	            this.setTranslationalVelocity(0.5);
-	            
-	    		// frequently change orientation
-	            if ((getCounter() % 100) == 0) {
-	                setRotationalVelocity(Math.PI / 2 * (0.5 - Math.random()));
-	            }    
 	        } else {
 	        	// don't move
-	        	this.setTranslationalVelocity(0);
+	        	this.setTranslationalVelocity(-0.1);
 	        	// rotate only until obstacle is not there
-	        	setRotationalVelocity(Math.PI / 2);
+	        	setRotationalVelocity(Math.PI / 20);
 	        }
     	}
     	

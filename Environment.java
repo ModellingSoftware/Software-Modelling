@@ -6,6 +6,7 @@ import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
+import simbad.sim.Arch;
 import simbad.sim.Box;
 import simbad.sim.EnvironmentDescription;
 import simbad.sim.Wall;
@@ -50,6 +51,10 @@ public class Environment extends EnvironmentDescription {
         Wall roomWall2 = new Wall(new Vector3d(3.5, 0, -2), 3, 1, this);
         roomWall2.setColor(new Color3f(Color.YELLOW));
         add(roomWall2);
+        
+        Arch arch1 = new Arch(new Vector3d(2, 0, -1), this);
+        arch1.setColor(new Color3f(Color.CYAN));
+        add(arch1);
         
         Box box1 = new Box(new Vector3d(-3, 0, -3), new Vector3f(1, 1, 1), this);
         box1.setColor(new Color3f(Color.ORANGE));
