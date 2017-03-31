@@ -18,11 +18,13 @@ public abstract class Rover extends Agent{
 	
     public Rover(Vector3d position, String name) {
         super(position, name);
-    	this.setCanBeTraversed(false);
         // Add bumpers
-        RobotFactory.addBumperBeltSensor(this, 12);
+        RobotFactory.addBumperBeltSensor(this, 1);
         // Add sonars
-        RobotFactory.addSonarBeltSensor(this, 1);        
+        RobotFactory.addSonarBeltSensor(this, 1);       
+        
+        speed = 0.5f;
+        lastCollisionFreePos = null;   
     }
 
 	/**
@@ -40,7 +42,7 @@ public abstract class Rover extends Agent{
 	/**
 	 * 
 	 */
-	private Vector3D position;
+	private Vector3d position;
 	/**
 	 * 
 	 */
@@ -50,6 +52,7 @@ public abstract class Rover extends Agent{
 	 */
 	private boolean active;
 	
+	private Vector3d lastCollisionFreePos;
 	/**
 	 * 
 	 * @return
@@ -214,32 +217,41 @@ public abstract class Rover extends Agent{
     /** This method is called by the simulator engine on reset. */
     public void initBehavior() {
         System.out.println("I exist and my name is " + this.name);
+        setRotationalVelocity(Math.PI / 2 * (0.5 - Math.random()));
     }
 
     /** This method is call cyclically (20 times per second) by the simulator engine. */
     public void performBehavior() {
-    	
+    	Rover collidingRover = null;
     	// perform the following actions every 5 virtual seconds
-    	if(this.getCounter() % 5 == 0) {
-    		if(this.getCounter() % 20 == 0) {
-		    	if(this.collisionDetected()) {
-		    		this.currentMode = "avoidObstacle";
-		    	} else {
-		    		this.currentMode = "moveForward";
-		    	}
-    		} else {
+    	if(this.getCounter() % 5 == 0) {    		
+    		if(this.getVeryNearAgent() != null) {
+    			collidingRover = (Rover) this.getVeryNearAgent();
+    			this.currentMode = "avoidRover";
+    		} else if(this.collisionDetected()) {
+	    		this.currentMode = "avoidObstacle";
+	    	} else {
 	    		this.currentMode = "moveForward";
-		    }
+	    	}
 	        
-	    	if(this.currentMode == "moveForward") {
+	    	if(this.currentMode.equals("moveForward")) {
+	    		
 	        	setRotationalVelocity(0);
 	    		// the robot's speed is always 0.5 m/s
-	            this.setTranslationalVelocity(0.5);
+	            this.setTranslationalVelocity(speed);
+	        } else if(this.currentMode.equals("avoidRover")) {
+	        	//if (collidingRover.currentMode.equals("avoidRover")) {
+	        	//}
+	        	//this.setTranslationalVelocity(collidingRover.getTranslationalVelocity() - 0.1);
+	        	// don't move
+	        	this.setTranslationalVelocity(-speed);
+	        	// rotate only until obstacle is not there
+	        	setRotationalVelocity(Math.PI / 1);
 	        } else {
 	        	// don't move
-	        	this.setTranslationalVelocity(-0.1);
+	        	this.setTranslationalVelocity(-speed);
 	        	// rotate only until obstacle is not there
-	        	setRotationalVelocity(Math.PI / 20);
+	        	setRotationalVelocity(Math.PI / 1);
 	        }
     	}
     	

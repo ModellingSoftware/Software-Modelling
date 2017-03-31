@@ -52,10 +52,6 @@ public class Environment extends EnvironmentDescription {
         roomWall2.setColor(new Color3f(Color.YELLOW));
         add(roomWall2);
         
-        Arch arch1 = new Arch(new Vector3d(2, 0, -1), this);
-        arch1.setColor(new Color3f(Color.CYAN));
-        add(arch1);
-        
         Box box1 = new Box(new Vector3d(-3, 0, -3), new Vector3f(1, 1, 1), this);
         box1.setColor(new Color3f(Color.ORANGE));
         add(box1);
