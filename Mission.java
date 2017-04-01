@@ -75,10 +75,9 @@ public class Mission {
         ArrayList<Agent> swarm = new ArrayList<Agent>();
         
         for (int i = 0; i < numOfRoverTeams; i++) {
-        	MappingRover newMapBot = new MappingRover(new Vector3d(-3, 20, -3 + 2*i), "MappingRover " + i);
-        	CameraRover newPhotoBot = new CameraRover(new Vector3d(-1, 20, -3 + 2*i), "PhotoRover " + i);
-        	CO2Rover newCO2Bot = new CO2Rover(new Vector3d(1, 20, -3 + 2*i), "CO2Rover " + i);
-
+        	MappingRover newMapBot = new MappingRover(new Vector3d(-1.5 + (i % 2) * 2, 20, -1.5 + (int) (i / 2) * 2), "MappingRover " + i);
+        	CameraRover newPhotoBot = new CameraRover(new Vector3d(-0.5 + (i % 2) * 2, 20, -1.5 + (int) (i / 2) * 2), "PhotoRover " + i);
+        	CO2Rover newCO2Bot = new CO2Rover(new Vector3d(-1.5 + (i % 2) * 2, 20, -0.5 + (int) (i / 2) * 2), "CO2Rover " + i);
         	
         	swarm.add(newMapBot);
         	centralStation.indexNewRover(newMapBot);

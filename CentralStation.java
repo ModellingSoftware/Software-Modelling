@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 
  */
-public class CentralStation {
+public class CentralStation extends Subject {
 	/**
 	 * 
 	 */

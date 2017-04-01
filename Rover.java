@@ -116,7 +116,7 @@ public abstract class Rover extends Agent{
 	 * 
 	 * @return
 	 */
-	public void setPosition(Vector3D position) {
+	public void setPosition(Vector3d position) {
 		this.position = position;
 	}
 
