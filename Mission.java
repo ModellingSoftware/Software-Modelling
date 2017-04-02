@@ -75,18 +75,41 @@ public class Mission {
         ArrayList<Agent> swarm = new ArrayList<Agent>();
         
         for (int i = 0; i < numOfRoverTeams; i++) {
-        	MappingRover newMapBot = new MappingRover(new Vector3d(-1.5 + (i % 2) * 2, 20, -1.5 + (int) (i / 2) * 2), "MappingRover " + i);
-        	CameraRover newPhotoBot = new CameraRover(new Vector3d(-0.5 + (i % 2) * 2, 20, -1.5 + (int) (i / 2) * 2), "PhotoRover " + i);
-        	CO2Rover newCO2Bot = new CO2Rover(new Vector3d(-1.5 + (i % 2) * 2, 20, -0.5 + (int) (i / 2) * 2), "CO2Rover " + i);
+        	if (i == 0 || i == 3) {
+	        	MappingRover newMapBot = new MappingRover(new Vector3d(-1.5, 20, -1.5 + i), "MappingRover " + i);
+	        	CameraRover newPhotoBot = new CameraRover(new Vector3d(-0.5, 20, -1.5 + i), "PhotoRover " + i);
+	        	CO2Rover newCO2Bot = new CO2Rover(new Vector3d(0.5, 20, -1.5 + i), "CO2Rover " + i);
         	
-        	swarm.add(newMapBot);
-        	centralStation.indexNewRover(newMapBot);
-        	
-        	swarm.add(newPhotoBot);
-        	centralStation.indexNewRover(newPhotoBot);
+	        	newMapBot.setDirection(Directions.West);
+	        	swarm.add(newMapBot);
+	        	centralStation.indexNewRover(newMapBot);
+	        	newMapBot.setActive(true);
+	        	
+	        	newPhotoBot.setDirection(Directions.West);
+	        	swarm.add(newPhotoBot);
+	        	centralStation.indexNewRover(newPhotoBot);
 
-        	swarm.add(newCO2Bot);
-        	centralStation.indexNewRover(newCO2Bot);
+	        	newCO2Bot.setDirection(Directions.West);
+	        	swarm.add(newCO2Bot);
+	        	centralStation.indexNewRover(newCO2Bot);
+        	} else {     	
+	        	MappingRover newMapBot = new MappingRover(new Vector3d(1.5, 20, -1.5 + i), "MappingRover " + i);
+	        	CameraRover newPhotoBot = new CameraRover(new Vector3d(0.5, 20, -1.5 + i), "PhotoRover " + i);
+	        	CO2Rover newCO2Bot = new CO2Rover(new Vector3d(-0.5, 20, -1.5 + i), "CO2Rover " + i);
+        	
+	        	newMapBot.setDirection(Directions.East);
+	        	swarm.add(newMapBot);
+	        	centralStation.indexNewRover(newMapBot);
+	        	newMapBot.setActive(true);
+	        	
+	        	newPhotoBot.setDirection(Directions.East);
+	        	swarm.add(newPhotoBot);
+	        	centralStation.indexNewRover(newPhotoBot);
+
+	        	newCO2Bot.setDirection(Directions.East);
+	        	swarm.add(newCO2Bot);
+	        	centralStation.indexNewRover(newCO2Bot);
+        	}
         }
         
         for(Agent robot:swarm){

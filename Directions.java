@@ -36,5 +36,9 @@ public enum Directions {
 	/**
 	 * 
 	 */
-	SouthEast;
+	SouthEast,
+	/**
+	 * 
+	 */
+	SouthWest;
 };
