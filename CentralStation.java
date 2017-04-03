@@ -96,11 +96,11 @@ public class CentralStation extends Subject {
 		int iteration = 0;
 		
 		while (true) {
-			out.print(iteration + "\n");
+			//out.print(iteration + "\n");
 			for (int i = 0; i < numberOfRovers; i++) {
-				out.print(rovers[i].getPosition() + "\n");
+				//out.print(rovers[i].getPosition() + "\n");
 			}
-			out.print("\n");
+			//out.print("\n");
 			try {
 				TimeUnit.SECONDS.sleep(1);
 			} catch (InterruptedException e) {
@@ -120,7 +120,7 @@ public class CentralStation extends Subject {
 	 * 
 	 * @param mappingRover 
 	 */
-	public void initCameraStage(MappingRover mappingRover) {
+	public void initCameraStage(OldMappingRover mappingRover) {
 	}
 
 	/**

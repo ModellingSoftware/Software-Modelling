@@ -1,11 +1,11 @@
 package ROVU;
 
 public class RoverTeam {
-	MappingRover mapper;
+	OldMappingRover mapper;
 	CameraRover photographer;
 	CO2Rover airInspector;
 	
-	RoverTeam(MappingRover m, CameraRover c, CO2Rover a){
+	RoverTeam(OldMappingRover m, CameraRover c, CO2Rover a){
 		mapper = m;
 		photographer = c;
 		airInspector = a;

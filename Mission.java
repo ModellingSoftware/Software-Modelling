@@ -76,14 +76,16 @@ public class Mission {
         
         for (int i = 0; i < numOfRoverTeams; i++) {
         	if (i == 0 || i == 3) {
-	        	MappingRover newMapBot = new MappingRover(new Vector3d(-1.5, 20, -1.5 + i), "MappingRover " + i);
+	        	//MappingRover newMapBot = new MappingRover(new Vector3d(-1.5, 20, -1.5 + i), "MappingRover " + i);
 	        	CameraRover newPhotoBot = new CameraRover(new Vector3d(-0.5, 20, -1.5 + i), "PhotoRover " + i);
 	        	CO2Rover newCO2Bot = new CO2Rover(new Vector3d(0.5, 20, -1.5 + i), "CO2Rover " + i);
         	
+	        	/**
 	        	newMapBot.setDirection(Directions.West);
 	        	swarm.add(newMapBot);
 	        	centralStation.indexNewRover(newMapBot);
 	        	newMapBot.setActive(true);
+	        	**/
 	        	
 	        	newPhotoBot.setDirection(Directions.West);
 	        	swarm.add(newPhotoBot);
@@ -93,7 +95,7 @@ public class Mission {
 	        	swarm.add(newCO2Bot);
 	        	centralStation.indexNewRover(newCO2Bot);
         	} else {     	
-	        	MappingRover newMapBot = new MappingRover(new Vector3d(1.5, 20, -1.5 + i), "MappingRover " + i);
+	        	OldMappingRover newMapBot = new OldMappingRover(new Vector3d(1.5, 20, -1.5 + i), "MappingRover " + i);
 	        	CameraRover newPhotoBot = new CameraRover(new Vector3d(0.5, 20, -1.5 + i), "PhotoRover " + i);
 	        	CO2Rover newCO2Bot = new CO2Rover(new Vector3d(-0.5, 20, -1.5 + i), "CO2Rover " + i);
         	

@@ -25,7 +25,7 @@ public abstract class Rover extends Agent{
         
         active = false;
         speed = 0.5f;
-        maxSpeed = 0.1f;
+        maxSpeed = .05f;
         lastCollisionFreePos = null;   
         direction = Directions.North;
         //setSpawnRotation(); 
@@ -276,7 +276,7 @@ public abstract class Rover extends Agent{
 		    	} else {
 		    		this.currentMode = "moveForward";
 		    	}
-		        
+		        /**
 		    	if(this.currentMode.equals("moveForward")) {
 		        	setRotationalVelocity(0);
 		    		// the robot's speed is always 0.5 m/s
@@ -295,6 +295,7 @@ public abstract class Rover extends Agent{
 		        	// rotate only until obstacle is not there
 		        	setRotationalVelocity(Math.PI / 1);
 		        }
+		        **/
 	    	}
     	}
     }
