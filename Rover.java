@@ -27,7 +27,7 @@ public abstract class Rover extends Agent{
         speed = 0.5f;
         maxSpeed = .05f;
         lastCollisionFreePos = null;   
-        direction = Directions.North;
+        currentDirection = Directions.North;
         //setSpawnRotation(); 
     }
 
@@ -42,7 +42,7 @@ public abstract class Rover extends Agent{
 	/**
 	 * 
 	 */
-	private Directions direction;
+	private Directions currentDirection;
 	/**
 	 * 
 	 */
@@ -250,6 +250,198 @@ public abstract class Rover extends Agent{
 						break;
 		}
 	}
+
+		public void setSpawnRotation() {
+		switch (direction) {
+
+		case North:		rotateY(Math.PI * (1 / 2));
+						break;
+		
+		case NorthEast: rotateY(Math.PI * (1 / 4));
+						break;
+
+		case East: 		rotateY(0);
+						break;
+
+		case SouthEast: rotateY(Math.PI * -(1 / 4));
+						break;
+
+		case South: 	rotateY(Math.PI * -(1 / 2));
+						break;
+
+		case SouthWest:	rotateY(Math.PI * -(3 / 4));
+						break;
+
+		case West: 		rotateY(Math.PI);
+						break;
+
+		case NorthWest:	rotateY(Math.PI * (3 / 4));
+						break;
+		}
+	}
+
+	private void changeRelativeDirection(String direction){
+    	switch(direction){
+    	
+    	case "Left":
+    		rotateY(Math.PI / 2); 
+    		switch(this.currentDirection){
+    		case South:
+    			this.currentDirection = Directions.East;
+    			break;
+    		case West:
+    			this.currentDirection = Directions.South;
+    			break;
+    		case North:
+    			this.currentDirection = Directions.West;
+    			break;
+    		case East:
+    			this.currentDirection = Directions.North;
+    			break;
+			default:
+				break;
+    		}
+    		break;
+    		
+    	case "Right":
+    		rotateY(-Math.PI/2);
+    		switch(this.currentDirection){
+    		case South:
+    			this.currentDirection = Directions.West;
+    			break;
+    		case West:
+    			this.currentDirection = Directions.North;
+    			break;
+    		case North:
+    			this.currentDirection = Directions.East;
+    			break;
+    		case East:
+    			this.currentDirection = Directions.South;
+    			break;
+			default:
+				break;
+    		}
+    		break;
+    		
+    	case "Back":
+    		rotateY(-Math.PI);
+    		switch(this.currentDirection){
+    		case South:
+    			this.currentDirection = Directions.North;
+    			break;
+    		case West:
+    			this.currentDirection = Directions.East;
+    			break;
+    		case North:
+    			this.currentDirection = Directions.South;
+    			break;
+    		case East:
+    			this.currentDirection = Directions.West;
+    			break;
+			default:
+				break;
+    		}
+    		break;
+    	}
+    }
+    
+    private void changeAbsoluteDirection(Directions direction){
+    	switch(direction){
+    	
+    	case North:
+    		
+    		switch(this.currentDirection){
+    		
+    		case South:
+    			changeRelativeDirection("Back");
+    			break;
+    			
+    		case West:
+    			changeRelativeDirection("Right");
+    			break;
+    			
+    		case East:
+    			changeRelativeDirection("Left");
+    			break;
+    			
+			default:
+				break;
+    		}
+    		
+    		break;
+    		
+    	case West:
+    		
+    		switch(this.currentDirection){
+    		
+    		case South:
+    			changeRelativeDirection("Right");
+    			break;
+    			
+    		case North:
+    			changeRelativeDirection("Left");
+    			break;
+    			
+    		case East:
+    			changeRelativeDirection("Back");
+    			break;
+    			
+			default:
+				break;
+    		}
+    		
+    		break;
+    		
+    	case South:
+    		
+    		switch(this.currentDirection){
+    		
+    		case West:
+    			changeRelativeDirection("Left");
+    			break;
+    			
+    		case North:
+    			changeRelativeDirection("Back");
+    			break;
+    			
+    		case East:
+    			changeRelativeDirection("Right");
+    			break;
+    			
+			default:
+				break;
+    		}
+    		
+    		break;
+    		
+    	case East:
+    		
+    		switch(this.currentDirection){
+    		
+    		case South:
+    			changeRelativeDirection("Left");
+    			break;
+    			
+    		case West:
+    			changeRelativeDirection("Back");
+    			break;
+    			
+    		case North:
+    			changeRelativeDirection("Right");
+    			break;
+    			
+			default:
+				break;
+    		}
+    		
+    		break;
+    	
+    	}
+
+    	
+
+    	
+    }
 	/**
 	 * 
 	 */
